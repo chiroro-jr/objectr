@@ -77,7 +77,7 @@ def detect_objects(file: UploadFile = File(...), query: str | None = Form()):
 
         # detect objects in the frame and draw bounding boxes around them
         # this will return a ndarray (of what shape).
-        frame = model.detect_objects(frame)
+        # frame = model.detect_objects(frame)
         frames.append(frame)
 
     # release video from memory to prevent memory leaks
@@ -87,13 +87,13 @@ def detect_objects(file: UploadFile = File(...), query: str | None = Form()):
     os.remove(temp_file.name)
 
     # find any frame with the object
-    frame = find_object(frames, query)
+    # frame = find_object(frames, query)
 
-    if frame is None:
-        raise HTTPException(status_code=404, detail="Object not found")
+    # if frame is None:
+    #     raise HTTPException(status_code=404, detail="Object not found")
 
     # Convert the frame into an image
-    image = cv.cvtColor(frame[0], cv.COLOR_RGB2BGR)
+    image = cv.cvtColor(frames[0], cv.COLOR_RGB2BGR)
 
     # create a PIL Image object from the ndarray
     image = Image.fromarray(image)
